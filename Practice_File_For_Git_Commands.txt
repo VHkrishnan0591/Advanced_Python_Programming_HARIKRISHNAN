@@ -3,3 +3,5 @@ Familarising with Git Commands
 First with Git Desktop
 
 Second with Terminal using git bash
+
+Last with inside the VS Code without using the terminal
