@@ -1,3 +1,5 @@
 Familarising with Git Commands
 
 First with Git Desktop
+
+Second with Terminal using git bash
