@@ -41,13 +41,22 @@ def front_x(words):
   # +++your code here+++
   x_alpha_list = []
   other_alpha__list = []
+
+  # Spliting the x words and non x words into two list 
+
   for word in words:
     if word[0] == 'x':
       x_alpha_list.append(word)
     else:
       other_alpha__list.append(word)
+  
+  # Sorting both the lists
+
   x_alpha_list.sort()
   other_alpha__list.sort()
+
+  # Combining the both the sorted list
+
   final_list = x_alpha_list + other_alpha__list
   return final_list
 
@@ -62,9 +71,12 @@ def front_x(words):
 def sort_last(tuples):
   # +++your code here+++
   lst = tuples
+
+  # Sorting the list using the last element
+  
   for i in range(len(lst)):
    for j in range(i+1,len(lst)):
-    if lst[i][-1] > lst[j][-1]:
+    if lst[i][-1] > lst[j][-1]: #lst[j[-1]] -> represents the last element
       lst[i], lst[j] = lst[j], lst[i]
   return lst
 
