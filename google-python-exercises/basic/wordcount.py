@@ -45,6 +45,90 @@ import sys
 # and builds and returns a word/count dict for it.
 # Then print_words() and print_top() can just call the utility function.
 
+def print_words(filename):
+  f = open(filename, 'rt', encoding='utf-8')
+  s =""
+
+  # Reading the file and storing the content in string
+
+  for line in f:
+    s = s + line
+  
+  # Converitng into lowercase and removing punctuation
+
+  s = s.lower()
+  l = ["'",'"','!','.', ',','`',':',';',')','(','?']
+  for i in l:
+    s = s.replace(i,"")
+  
+  # Removing the Linespaces
+
+  s = s.replace("\n"," ")
+  s = s.replace("--"," ")
+
+  # Spliting the long text into each words
+
+  lst = s.split(" ")
+
+  # Counting the each word by identifying the unique word
+
+  unique_list = list(set(lst))
+
+  # Removing the empty strings that have caused due to the occurence of consecutive punctuation
+  
+  unique_list = [word for word in unique_list if word]
+  words_count = {}
+  for word in unique_list:
+    words_count[word] = lst.count(word)
+  print(words_count)
+
+def print_top(filename):
+  f = open(filename, 'rt', encoding='utf-8')
+  s =""
+
+  # Reading the file and storing the content in string
+
+  for line in f:
+    s = s + line
+  
+  # Converitng into lowercase and removing punctuation
+
+  s = s.lower()
+  l = ["'",'"','!','.', ',','`',':',';',')','(','?']
+  for i in l:
+    s = s.replace(i,"")
+  
+  # Removing the Linespaces
+
+  s = s.replace("\n"," ")
+  s = s.replace("--"," ")
+
+  # Spliting the long text into each words
+
+  lst = s.split(" ")
+
+  # Counting the each word by identifying the unique word
+
+  unique_list = list(set(lst))
+
+  # Removing the empty strings that have caused due to the occurence of consecutive punctuation
+  
+  unique_list = [word for word in unique_list if word]
+  words_count = {}
+  for word in unique_list:
+    words_count[word] = lst.count(word)
+  
+  # Sorting the dictionary of words with the count based on counts in descending order
+
+  sorted_dict = dict(sorted(words_count.items(), key=lambda item: item[1],reverse= True))
+  lst = list(sorted_dict.keys())
+
+  # Taking the 20 most used words
+    
+  top_count = {}
+  for key in lst[:20]:
+    top_count[key] = sorted_dict[key]
+  print(top_count)
 ###
 
 # This basic command line argument parsing code is provided and
