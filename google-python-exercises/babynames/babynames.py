@@ -111,5 +111,11 @@ def main():
   for filename in args:
    output_of_the_sorted_names = extract_names(filename)
 
+   if summary:
+     with open(filename + '.summary', "w", encoding='utf-8') as f:
+      for i in output_of_the_sorted_names:
+       f.write(i + '\n')
+      f.close()
+
 if __name__ == '__main__':
   main()
