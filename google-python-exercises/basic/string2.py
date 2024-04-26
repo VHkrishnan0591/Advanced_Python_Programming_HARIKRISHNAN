@@ -17,6 +17,9 @@
 # Return the resulting string.
 def verbing(s):
   # +++your code here+++
+
+  # Check for string ends with 'ing and replace it with ly
+
   if s[-3:] == 'ing':
     s = s+'ly'
   elif len(s) > 2:
@@ -34,9 +37,20 @@ def verbing(s):
 # This dinner is good!
 def not_bad(s):
   # +++your code here+++
+
+  # Finding the position of substring 'not'
+
   pos_of_word_not = s.find('not')
+
+  # Finding the position of substring 'bad'
+  
   pos_of_word_bad = s.find('bad')
+
+  # Check if substring 'bad' follows 'not'
+
   if (pos_of_word_not < pos_of_word_bad):
+
+    # Then Replaces the whole substring 'not'...'bad' with substring 'good'
     s = s.replace(s[pos_of_word_not:pos_of_word_bad+3], 'good')
   elif pos_of_word_bad == -1 or pos_of_word_not == -1:
     s = s
@@ -53,21 +67,30 @@ def not_bad(s):
 def front_back(a, b):
   # +++your code here+++
   def split_string(s):
+
+    # Checking for the length of string to be even or odd
+
     if len(s) %2 ==0:
+      # Split the front and back havlves of the string with same length
+
       mid_index = int(len(s)/2)
-      front = s[0:mid_index]
-      back = s[mid_index:]
-      return [front, back]
+      front_part = s[0:mid_index]
+      back_part = s[mid_index:]
+      return [front_part, back_part]
 
     else:
-      mid_index = int((len(s)/2))+1
-      front = s[0:mid_index]
-      back = s[mid_index:]
-      return [front, back]
-  a1 = split_string(a)
-  b1 = split_string(b)
+      # Split the front and back havlves of the string with extra character goes to first
 
-  return a1[0]+b1[0]+a1[1]+b1[1]
+      mid_index = int((len(s)/2))+1
+      front_part = s[0:mid_index]
+      back_part = s[mid_index:]
+      return [front_part, back_part]
+  a_split = split_string(a)
+  b_split = split_string(b)
+
+  # Concating the two strings into the form a-front + b-front + a-back + b-back
+
+  return a_split[0]+b_split[0]+a_split[1]+b_split[1]
 
 
 # Simple provided test() function used in main() to print

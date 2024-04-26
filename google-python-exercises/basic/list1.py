@@ -22,12 +22,18 @@
 # Note: python does not have a ++ operator, but += works.
 def match_ends(words):
   # +++your code here+++
-  count = 0
-  for word in words:
-    if (len(word) >= 2) and (word[0] == word[-1]):
-      count += 1
+  string_count = 0
 
-  return count
+  # Iterating through each string in the list of strings
+
+  for word in words:
+
+    # Increment the variable count by 1 if the string is of length greater than 2 and first and last character are same
+    
+    if (len(word) >= 2) and (word[0] == word[-1]):
+      string_count += 1
+
+  return string_count
 
 
 # B. front_x
@@ -70,15 +76,15 @@ def front_x(words):
 # Hint: use a custom key= function to extract the last element form each tuple.
 def sort_last(tuples):
   # +++your code here+++
-  lst = tuples
+  list_of_tuples = tuples
 
   # Sorting the list using the last element
   
-  for i in range(len(lst)):
-   for j in range(i+1,len(lst)):
-    if lst[i][-1] > lst[j][-1]: #lst[j[-1]] -> represents the last element
-      lst[i], lst[j] = lst[j], lst[i]
-  return lst
+  for i in range(len(list_of_tuples)):
+   for j in range(i+1,len(list_of_tuples)):
+    if list_of_tuples[i][-1] > list_of_tuples[j][-1]: #lst[j[-1]] -> represents the last element
+      list_of_tuples[i], list_of_tuples[j] = list_of_tuples[j], list_of_tuples[i]
+  return list_of_tuples
 
 
 # Simple provided test() function used in main() to print

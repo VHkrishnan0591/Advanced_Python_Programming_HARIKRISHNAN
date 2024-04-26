@@ -25,6 +25,9 @@
 # and donuts(23) returns 'Number of donuts: many'
 def donuts(count):
   # +++your code here+++
+
+  # Print result as many if count is greater than 10 else print the actual count
+
   if count<10:
     return "Number of donuts: %d" %(count)
   else: return "Number of donuts: many"
@@ -37,7 +40,12 @@ def donuts(count):
 # is less than 2, return instead the empty string.
 def both_ends(s):
   # +++your code here+++
+
+  # Checking the length of string is greater than 2
+
   if len(s) >2:
+    # Returning the string made of first and last 2 characters of given string
+
     return s[:2] + s[-2:]
   else: return ""
 
@@ -53,8 +61,11 @@ def both_ends(s):
 # where all instances of stra have been replaced by strb.
 def fix_start(s):
   # +++your code here+++
-  m = s[0] + s[1:].replace(s[0], "*")
-  return m
+
+  # Replacing the intial character with * on other occurences
+   
+  string_with_intial_char_replaced = s[0] + s[1:].replace(s[0], "*")
+  return string_with_intial_char_replaced
 
 
 # D. MixUp
@@ -66,9 +77,15 @@ def fix_start(s):
 # Assume a and b are length 2 or more.
 def mix_up(a, b):
   # +++your code here+++
-  c = a.replace(a[:2],b[:2])
-  b = b.replace(b[:2],a[:2])
-  return c + " " + b
+
+  # Swaping the first 2 characters in the first string
+
+  swaped_first_string = a.replace(a[:2],b[:2])
+  
+  # Swaping the first 2 xharacters in the second string
+
+  swaped_second_string = b.replace(b[:2],a[:2])
+  return swaped_first_string + " " + swaped_second_string
 
 
 # Provided simple test() function used in main() to print

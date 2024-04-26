@@ -14,6 +14,9 @@
 # modify the passed in list.
 def remove_adjacent(nums):
   # +++your code here+++
+
+  # Removing the duplicates in a list using set datastructure
+
   nums = list(set(nums))
   return nums
 
@@ -24,6 +27,9 @@ def remove_adjacent(nums):
 # pass of both lists.
 def linear_merge(list1, list2):
   # +++your code here+++_
+
+  # Sorting the Concatenated lists
+  
   return sorted(list1 +list2)
 
 # Note: the solution above is kind of cute, but unforunately list.pop(0)
