@@ -10,6 +10,7 @@ import os
 import re
 import sys
 import urllib
+import urllib.request
 
 """Logpuzzle exercise
 Given an apache logfile, find the puzzle urls and download the images.
@@ -26,6 +27,40 @@ def read_urls(filename):
   increasing order."""
   # +++your code here+++
   
+  # Opening the file
+
+  f = open(filename, encoding='utf-8')
+
+  # Reading the contents of the file into a string varaible file_read_string
+  
+  file_read_string = f.read()
+
+  # Getting the servername from the filename using split function
+
+  server_name = filename.split('_')[1] # Common convention servername follows after '_' sign in the filename
+
+  # Extracting the image urls from the log file
+
+  matching_line_of_image_url = re.findall(r'GET (\S+puzzle\S+.jpg)', file_read_string)
+
+  # Getting the full URL of all the images
+  full_image_url_list = []
+  for image_url in matching_line_of_image_url:
+    full_image_url_list.append('https://' + server_name + image_url)
+  
+  # Removing the duplicate usig set data structure
+
+  full_image_url_list = set(full_image_url_list)
+    
+  # Sorting the URL in alphabetical order
+
+  full_image_url_list = sorted(full_image_url_list,key=lambda full_url_list: full_url_list[-8:-4])
+
+  # print(full_image_url_list)
+
+  return full_image_url_list
+
+
 
 def download_images(img_urls, dest_dir):
   """Given the urls already in the correct order, downloads
@@ -36,6 +71,20 @@ def download_images(img_urls, dest_dir):
   Creates the directory if necessary.
   """
   # +++your code here+++
+  if not os.path.exists(dest_dir):
+    os.mkdir(dest_dir)
+  each_image_count = 0
+  filepath_of_html_file = os.path.join(dest_dir, "index.html")
+  for image_url in img_urls:
+    urllib.request.urlretrieve(image_url, os.path.abspath(os.path.join(dest_dir, 'img'+str(each_image_count)+'.jpg')))
+    each_image_count = each_image_count+1
+  with open( filepath_of_html_file, 'w', encoding='utf-8') as f:  
+    f.write('<html>' + '\n')
+    f.write('<body>' + '\n')
+    for iterator in range(each_image_count):
+      f.write('<img src="img%d.jpg">'%(iterator))
+    f.write('\n' + '</body>' + '\n')
+    f.write('</html>' + '\n')
 
 
 def main():
