@@ -71,13 +71,22 @@ def download_images(img_urls, dest_dir):
   Creates the directory if necessary.
   """
   # +++your code here+++
+
+  # Creating a directory if dest_dir does not exist
+
   if not os.path.exists(dest_dir):
     os.mkdir(dest_dir)
   each_image_count = 0
   filepath_of_html_file = os.path.join(dest_dir, "index.html")
+
+  # Downloading the images into the given directory
+
   for image_url in img_urls:
     urllib.request.urlretrieve(image_url, os.path.abspath(os.path.join(dest_dir, 'img'+str(each_image_count)+'.jpg')))
     each_image_count = each_image_count+1
+  
+  # Opening the html file in write mode in the directory and writing all the html content with the images
+  
   with open( filepath_of_html_file, 'w', encoding='utf-8') as f:  
     f.write('<html>' + '\n')
     f.write('<body>' + '\n')
