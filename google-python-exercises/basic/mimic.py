@@ -48,13 +48,64 @@ import sys
 def mimic_dict(filename):
   """Returns mimic dict mapping each word to list of words which follow it."""
   # +++your code here+++
-  return
+
+  # Opening the file
+
+  f = open(filename, encoding='utf-8')
+
+  # Reading the contents of the file into a string varaible file_read_string
+  
+  file_read_string = f.read()
+
+  # Removing punctuation
+
+  # list_of_punctuation = ["'",'"','!','.', ',','`',':',';',')','(','?','-']
+  # for i in list_of_punctuation:
+  #   file_read_string = file_read_string.replace(i,"")
+  
+  # Spliting the file content word by word
+
+  list_of_words = file_read_string.replace('\n', " ").split(" ")
+  list_of_words =[i for i in list_of_words if i != ""]
+  
+  # Creating a dictionary to map the words with other word which follows the previous
+
+  mimic_dict = {'':[list_of_words[0]]}
+  
+  # Iterating through the list of words on the file to check for all the words following it and map them in a dictionary
+
+  for i in list_of_words:
+    if i != list_of_words[len(list_of_words)-1]:
+      following_word  = [list_of_words[index+1] for (index, item) in enumerate(list_of_words) if item == i]
+      mimic_dict[i] = following_word
+
+  return mimic_dict
 
 
 def print_mimic(mimic_dict, word):
   """Given mimic dict and start word, prints 200 random words."""
   # +++your code here+++
-  return
+  
+  # Maping the start word to a loopup variable used for search in dictionary
+
+  lookup_word = word
+
+  # Running the loop 200 times to print 200 words
+
+  for i in range(200):
+
+  # Suppose lookupword is not present in dictionary start with empty string and choose a random mapping word from mimic_dict 
+  # Else choose a  random mapping word till reaching 200 words
+
+    if mimic_dict.get(lookup_word) is None:
+      lookup_word = ''
+      following_word_list = mimic_dict[lookup_word]
+      lookup_word = random.choice(following_word_list)
+      print(lookup_word, end=" ")
+    else:
+      following_word_list = mimic_dict[lookup_word]
+      lookup_word = random.choice(following_word_list)
+      print(lookup_word, end = " ")
 
 
 # Provided main(), calls mimic_dict() and mimic()
