@@ -17,7 +17,32 @@ import subprocess
 
 # +++your code here+++
 # Write functions and modify main() to call them
+def get_special_paths(dir):
+  filenames = os.listdir(dir)
+  list_of_path_of_special_files =[]  # "special" file is one where the name contains the pattern __w__ somewhere, where the w is one or more word chars
+  for filename in filenames:
+    print(filename)
+    match = match = re.search(r'__(\w+)__', filename) 
+    if match:
+     print(os.path.abspath(os.path.join(dir, filename)))
+     list_of_path_of_special_files.append(os.path.abspath(os.path.join(dir, filename)))
+  return list_of_path_of_special_files
 
+def copy_to(paths, dir):
+  if os.path.exists(dir):
+    shutil.copy(paths, os.path.abspath(os.path.join(dir, os.path.basename(paths))))
+  else:
+    os.mkdir(dir)
+    shutil.copy(paths, os.path.abspath(os.path.join(dir, os.path.basename(paths))))
+
+def zip_to(paths, zippath):
+  cmd = 'zip -j  ' + zipath + paths
+  print("Command I'm going to do:", cmd)   ## good to debug cmd before actually running it
+  (status, output) = subprocess.getstatusoutput(cmd)
+  if status:    ## Error case, print the command's output to stderr and exit
+    sys.stderr.write(output)
+    sys.exit(status)
+  print(output)  ## Otherwise do something with the command's output
 
 
 def main():
@@ -50,6 +75,17 @@ def main():
 
   # +++your code here+++
   # Call your functions
+  directory_and_its_file_dictionary = {}
+  for directory in args:
+   list_of_path_of_files = get_special_paths(directory)
+   directory_and_its_file_dictionary[directory] = list_of_path_of_files
+  if todir != '':
+   for filepath_list in directory_and_its_file_dictionary.values():
+    for filepath in filepath_list:
+     copy_to(filepath, dir)
+  if tozip != '':
+   for filepath_list in directory_and_its_file_dictionary.values():
+    zip_to(filepath_list, tozip)
 
 if __name__ == '__main__':
   main()
